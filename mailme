@@ -1,0 +1,23 @@
+
+from urllib import request
+import smtplib
+
+from email.mime.text import MIMEText # email module
+
+mail_sender = 'email_of_sender'
+mail_receiver = 'email_of_receiver'
+
+
+def send_mail(msg):
+
+    # Create a text/plain message
+    msg            = MIMEText(f'status is: {msg}')
+    msg['Subject'] = 'status of hit'
+    msg['From']    = mail_sender
+    msg['To']      = mail_receiver
+
+    s              = smtplib.SMTP('localhost')
+    s.sendmail(mail_sender, [mail_receiver], msg.as_string())
+    s.quit()
+
+
