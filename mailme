@@ -4,20 +4,32 @@ import smtplib
 
 from email.mime.text import MIMEText # email module
 
-mail_sender = 'email_of_sender'
+SenderAddress = 'email_of_sender'
 mail_receiver = 'email_of_receiver'
-
+smtp_server  = "smtp.gmail.com"
+smtp_port    = 587
+password     = pass_to_log_2_mail_server
 
 def send_mail(msg):
 
     # Create a text/plain message
     msg            = MIMEText(f'status is: {msg}')
     msg['Subject'] = 'status of hit'
-    msg['From']    = mail_sender
+    msg['From']    = SenderAddress
     msg['To']      = mail_receiver
 
     s              = smtplib.SMTP('localhost')
     s.sendmail(mail_sender, [mail_receiver], msg.as_string())
     s.quit()
 
-
+def version2():
+    emails = []
+    server = smtplib.SMTP(smtp_server, smtp_port)
+    server.starttls()
+    server.login(SenderAddress, password)
+    msg = "Hello"
+    subject = "Hello"
+    body = "Subject: {}\n\n{}".format(subject,msg)
+    for email in emails:
+        server.sendmail(SenderAddress, email, body)
+    server.quit()
