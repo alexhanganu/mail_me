@@ -1,2 +1,2 @@
-# mail_me
-mass email sending
+# mailme
+just mail a mass of emails
